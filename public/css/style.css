@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+
+h1, h2, h3, h5, h5, p, a, label, button, select, option, tr, td, table, legend {
+    font-family: 'Italiana', serif;
+}
+
+body {
+    background-color: lightgray;
+}
+
+#home {
+    background-color: lightgray;
+    display: grid;
+    grid-template-areas: "titre" "appareil1" "appareil2" "appareil3" "appareil4" "appareil5";
+    grid-gap: 20px;
+    padding: 40px 20px;
+}
+
+main h2 {
+    grid-area: titre;
+}
+
+#appareil1 {
+    grid-area: appareil1;
+}
+
+#appareil2 {
+    grid-area: appareil2;
+}
+
+#appareil3 {
+    grid-area: appareil3;
+}
+
+#appareil4 {
+    grid-area: appareil4;
+}
+
+#appareil5 {
+    grid-area: appareil5;
+}
+
+figure {
+    position: relative;
+}
+
+figure figcaption {
+    background-color: rosybrown;
+    padding: 10px;
+}
+
+figure figcaption h3 {
+    font-size: 1.4rem;
+    color: black;
+}
+
+figure figcaption p {
+    font-size: 1.2rem;
+    color: black;
+}
+
+main article figure img {
+    object-fit: cover;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+main article a {
+    display: block;
+}
+
+.bg-image {
+    background-image: url("../../images/vcam_bg.jpg");
+    height: 200px;
+    grid-area: bienvenue;
+
+}
+
+.bienvenue {
+    color: lightgray;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.logo {
+    height: 40px;
+}
+
+
+.image-ori {
+
+    height: 100px;
+    grid-area: logo;
+}
+
+
+.btn-panier {
+    border-radius: 10px;
+    background-color: brown;
+    padding: 5px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.btn-panier:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+h4 {
+    background-color: aliceblue;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cam-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/vcam_5.jpg");
+    height: 50%;
+    background-position: center;
+    padding: 50px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+}
+
+.header-text {
+    text-align: center;
+    color: white;
+}
+
+.header-text button {
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header-text button:hover {
+    background-color: brown;
+    color: white;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 650px) {
+    .product {
+        display: flex;
+        height: 200px;
+        justify-content: center;
+    }
+
+}
+
+.header-text h1 a {
+    color: white;
+}
+
+h1 a:hover {
+    color: brown;
+}
+
+.btn-panier a {
+    color: white;
+}
+
+section h2 {
+    text-align: center;
+}
+
+#commande {
+    margin-top: 20px;
+}
+
+#commande-confirmation {
+    text-align: center;
+}
+
+/**form*/
+#price-total {
+    text-align: center;
+}
+
+tr:nth-child(odd) {
+    background-color: lightgray
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: brown;
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+select {
+    width: 100%;
+}
+
+form {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+}
+
+
+.empty {
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+    display: block;
+}
+
+fieldset {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-align: center;
+
+}
+
+.container h2 {
+    margin: 30px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/***tablette et plus **/
+@media screen and (min-width: 426px) {
+    #home {
+        background-color: lightgray;
+        display: grid;
+        grid-template-areas: "titre titre" "appareil1 appareil2" "appareil3 appareil4" "appareil5 appareil6";
+        grid-gap: 20px;
+        padding: 40px 20px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    main h2 {
+        grid-area: titre;
+    }
+
+    #appareil1 {
+        grid-area: appareil1;
+    }
+
+    #appareil2 {
+        grid-area: appareil2;
+    }
+
+    #appareil3 {
+        grid-area: appareil3;
+    }
+
+    #appareil4 {
+        grid-area: appareil4;
+    }
+
+    #appareil5 {
+        grid-area: appareil5;
+    }
+
+}
+#containerForm {
+    padding: 30px;
+}
+
+#champs {
+    margin: 20px 0;
+}
