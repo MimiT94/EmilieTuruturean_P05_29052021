@@ -1,21 +1,19 @@
-
 let CameraLocalStorage = JSON.parse(localStorage.getItem("camera"));
 
 // affichage des produits du panier
-const basket = document.querySelector("#containerForm")
+const basket = document.querySelector("#containerBasket")
 // si le panier est vide :
-if(CameraLocalStorage === null){
-    const emptyBasket = `  <h1> Votre panier  est vide</h1>`
+if (CameraLocalStorage === null) {
+    const emptyBasket = `<h1>Votre panier  est vide</h1>`;
     basket.innerHTML = emptyBasket;
     console.log("panier vide");
-}else {
+} else {
     console.log("panier pas vide")
 
 
-let basketCam = [];
-
-    for( j =0; j < CameraLocalStorage.length; j ++){
-        basketCam =  ` <table class="container">
+    let basketCam = `
+        <h2>Récapitulatif de votre commande:</h2>
+        <table class="container">
             <tr>
                 <th>Vos articles</th>
                 <th>Quantité</th>
@@ -23,6 +21,11 @@ let basketCam = [];
                 <th>Total</th>
 
             </tr>
+    `;
+
+    for (j = 0; j < CameraLocalStorage.length; j++) {
+        //fectch vers http://localhost:3000/api/cmaeras/idduproduit
+        basketCam += `
             <tr id="articles">
                 <td>${CameraLocalStorage[j].name}</td>
                 <td><select name="quantity" id="quantity">
@@ -38,47 +41,23 @@ let basketCam = [];
                     <option value="9">9</option>
                     <option value="10">10</option>
                 </select></td>
-                <td>${CameraLocalStorage[j].price/100}€</td>
+                <td>${CameraLocalStorage[j].price / 100}€</td>
                 <td>€</td>
-            </tr>
-            <tr>
+            </tr>   
+        `;
+    }
+    basketCam += `
+        <tr>
                 <td colspan="3" id="price-total">PRIX TOTAL</td>
                 <td>€</td>
 
             </tr>
         </table>
         <button class="btn-panier empty">Vider le panier</button>
+    `;
 
 
-        <form class="container">
-            <fieldset>
-                <legend>Vos informations</legend>
-                <label for="name">Nom :<input id="name" type="text" class="form-control" placeholder="Dupont" required/>
-                </label>
-                <label for="surname">Prénom :<input id="surname" type="text" class="form-control"
-                                                    placeholder="Jean Paul" required/></label>
-                <label for="email">Email :<input type="email" name="email" class="form-control" id="email"
-                                                 placeholder="JpDupont@gmail.com" required/></label>
-                <label for="address">Adresse :<input type="text" id="address" class="form-control"
-                                                    placeholder="13 rue des roses" required/></label>
-                <label for="postcode">Code Postal :<input id="postcode" type="number" class="form-control"
-                                                          placeholder="49000" required/></label>
-                <label for="city">Ville :<input id="city" type="text" class="form-control" placeholder="Angers"
-                                                required/></label>
-
-
-                <p id="champs">Merci de remplir tous les champs</p>
-                <button class="btn-panier" id="btnConfirm">Valider les
-                    informations 
-                    </button>
-            </fieldset>
-        </form>
-       
-`; }
-        if(j == CameraLocalStorage.length){
-            basket.innerHTML = basketCam;
-        }
-
+    basket.innerHTML = basketCam;
 
 
 }
@@ -87,18 +66,18 @@ let basketCam = [];
 
 //selection du bouton confirmation
 const btnConfirm = document.getElementById("btnConfirm");
-btnConfirm.addEventListener("click", ()=>
-
-{
-    class Form{
+btnConfirm.addEventListener("click", () => {
+    class Form {
         constructor() {
-        this.name  = document.getElementById("name").value;
-        this.surname = document.getElementById("surname").value;
-        this.email =document.getElementById("email").value;
-        this.address = document.getElementById("address").value;
-        this.postcode = document.getElementById("postcode").value;
-        this.city = document.getElementById("city").value;
-        }}
+            this.name = document.getElementById("name").value;
+            this.surname = document.getElementById("surname").value;
+            this.email = document.getElementById("email").value;
+            this.address = document.getElementById("address").value;
+            this.postcode = document.getElementById("postcode").value;
+            this.city = document.getElementById("city").value;
+        }
+    }
+
     const formValues = new Form();
 
 
@@ -109,14 +88,15 @@ btnConfirm.addEventListener("click", ()=>
         formValues
     }
     // mettre dans requete post les infos recupérés
-const order = {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json',
-    },
-    body : JSON.stringify(SendProducts),
+    const order = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(SendProducts),
 
-}
-fetch(`http://localhost:3000/api/cameras/order`, order)
+    }
+    fetch(`http://localhost:3000/api/cameras/order`, order)
     console.log(order)
 
 });
