@@ -23,6 +23,8 @@ class Camera {
     constructor(data) {
         this.camera = data;
         this.showCamera()
+
+
     }
 
     showCamera() {
@@ -48,11 +50,11 @@ class Camera {
 
        `
         ;
-        let lensesOptions = [];
+        let lensesOptions = ``;
 
 //selection de l'option
         for (let i = 0; i < camera.lenses.length; i++) {
-            lensesOptions += `<option value="${camera.lenses[i]}">${camera.lenses[i]}</option>;
+            lensesOptions += `<option >${camera.lenses[i]}</option>;
                                `
         }
         // ajout du choix des lenses avec id de select
@@ -65,45 +67,42 @@ class Camera {
         document.getElementById("btn").addEventListener("click", (e) => {
             e.preventDefault();
             let selectedCamera = camera;
-            selectedCamera.lensesOptions = document.querySelector("select").value;
+            selectedCamera.camera = document.querySelector("select").value;
 
 
 //recuperation des données de la page
             let productOptions = {
                 nameProduct: camera.name,
                 idCam: camera._id,
-                lensesOptions: camera.lenses,
+                lenses: camera.lenses,
                 quantity: 1,
-                Price: camera.price / 100
+                price: camera.price / 100
             }
             console.log(productOptions);
-
-
+// calcul du prix total
+            let totalPrice = localStorage.getItem('totalprice');
+            if(totalPrice !=null){
+                totalPrice = parseInt(totalPrice);
+                localStorage.setItem('totalprice', totalPrice + camera.price);
+            } else {
+                localStorage.setItem("totalprice", camera.price)
+            }
             //local storage
             let CameraLocalStorage = JSON.parse(localStorage.getItem("camera"));
             console.log(CameraLocalStorage)
-// message de confirmation
-            const popupConfirmation = () => {
-                if (window.confirm(`${camera.name} au prix de  ${camera.price / 100} € a bien été ajouté au panier.Cliquez sur  annuler pour revenir à la page d'accueil ou ok pour aller au panier`)) {
-                    window.location.href = "panier.html";
-                } else {
-                    window.location.href = "index.html";
-                }
-            }
+
             // fonction pour ajouter le produit selectionné au local storage
             const addCamerainLocalStorage = () => {
-
-                CameraLocalStorage.push(camera)
+                CameraLocalStorage.push(productOptions)
                 localStorage.setItem("camera", JSON.stringify(CameraLocalStorage));
             }
 
             if (CameraLocalStorage) {
                 addCamerainLocalStorage();
-                popupConfirmation();
+
             } else {
                 CameraLocalStorage = [];
                 addCamerainLocalStorage();
-                popupConfirmation();
             }
 
         })
