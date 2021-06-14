@@ -32,23 +32,23 @@
     <form class="container">
         <fieldset>
             <legend>Vos informations</legend>
-            <label for="name">Nom :<input id="name" type="text" class="form-control" placeholder="Dupont" required/>
+            <label for="name">Nom : <span class="champsIncorect" id="Nameerror"></span><input id="name" type="text" class="form-control" placeholder="Dupont" required/>
             </label>
-            <label for="surname">Prénom :<input id="surname" type="text" class="form-control"
+            <label for="surname">Prénom :<span class="champsIncorect" id="Surnameerror"></span><input id="surname" type="text" class="form-control"
                                                 placeholder="Jean Paul" required/></label>
-            <label for="email">Email :<input type="email" name="email" class="form-control" id="email"
+            <label for="email">Email :<span class="champsIncorect" id="Emailerror"></span><input type="email" name="email" class="form-control" id="email"
                                              placeholder="JpDupont@gmail.com" required/></label>
-            <label for="adress">Adresse :<input type="text" id="adress" class="form-control"
+            <label for="adress">Adresse :<span class="champsIncorect" id="Adresserror"></span><input type="text" id="adress" class="form-control"
                                                 placeholder="13 rue des roses" required/></label>
-            <label for="postcode">Code Postal :<input id="postcode" type="number" class="form-control"
+            <label for="postcode">Code Postal :<span class="champsIncorect" id="Postcodeerror"></span><input id="postcode" type="number" class="form-control"
                                                       placeholder="49000" required/></label>
-            <label for="city">Ville :<input id="city" type="text" class="form-control" placeholder="Angers"
+            <label for="city">Ville :<span class="champsIncorect" id="Cityerror"></span><input id="city" type="text" class="form-control" placeholder="Angers"
                                             required/></label>
 
 
             <p id="champs">Merci de remplir tous les champs</p>
-            <button class="btn-panier"><a href="confirmation_commande.html"> Valider les
-                informations </a></button>
+            <button class="btn-panier" id="btnConfirm"> Valider les
+                informations </button>
         </fieldset>
     </form>
 

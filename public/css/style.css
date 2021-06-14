@@ -291,3 +291,6 @@ fieldset {
 #champs {
     margin: 20px 0;
 }
+form .champsIncorect{
+    color: red;
+}
