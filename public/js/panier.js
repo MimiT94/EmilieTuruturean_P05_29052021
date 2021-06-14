@@ -1,4 +1,5 @@
 let CameraLocalStorage = JSON.parse(localStorage.getItem("camera"));
+let totalprice = JSON.parse(localStorage.getItem("totalprice"))
 
 // affichage des produits du panier
 const basket = document.querySelector("#containerBasket")
@@ -27,20 +28,9 @@ if (CameraLocalStorage === null) {
         //fectch vers http://localhost:3000/api/cmaeras/idduproduit
         basketCam += `
             <tr id="articles">
-                <td>${CameraLocalStorage[j].name}</td>
-                <td><select name="quantity" id="quantity">
-                    <option value="">--Choisissez la quantité--</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select></td>
+                <td>${CameraLocalStorage[j].nameProduct}</td>
+                <td>${CameraLocalStorage[j].quantity}
+                   </td>
                 <td>${CameraLocalStorage[j].price / 100}€</td>
                 <td>€</td>
             </tr>   
@@ -49,7 +39,7 @@ if (CameraLocalStorage === null) {
     basketCam += `
         <tr>
                 <td colspan="3" id="price-total">PRIX TOTAL</td>
-                <td>€</td>
+                <td>${totalprice/100}€</td>
 
             </tr>
         </table>
@@ -61,7 +51,7 @@ if (CameraLocalStorage === null) {
 
 
 }
-// afficher plusieurs produits dans le panier
+
 // vider le panier
 
 //selection du bouton confirmation
