@@ -86,17 +86,20 @@ btnConfirm.addEventListener("click", (e) => {
     const textAlert = (value) => {
         return ` ${value} : les chiffes ne sont pas autorises`;
     }
-const regexNameSurnameCity = (value) => {
-    return /^[A-Za-z]{3,15}$/.test(value);
-}
+    const regexNameSurnameCity = (value) => {
+        return /^[A-Za-z]{3,15}$/.test(value);
+    }
+
 //fonction pour l'input valide
-    function validElement(querySelectorId){
-        document.querySelector(`#${querySelectorId}`).textContent ="";
+    function validElement(querySelectorId) {
+        document.querySelector(`#${querySelectorId}`).textContent = "";
     }
+
     //fonction pour l'input invalide
-    function invalidElement(querySelectorId){
-        document.querySelector(`#${querySelectorId}`).textContent ="Veuillez bien rentrer ce champs";
+    function invalidElement(querySelectorId) {
+        document.querySelector(`#${querySelectorId}`).textContent = "Veuillez bien compléter ce champs";
     }
+
     function nameValid() {
 // condition de mini  3 lettre pour le nom
         const theName = formValues.name;
@@ -108,17 +111,7 @@ const regexNameSurnameCity = (value) => {
             return false;
         }
     }
-    function CityValid() {
-// condition de mini  3 lettre pour le nom
-        const theCity = formValues.city;
-        if (regexNameSurnameCity(theCity)) {
-            validElement("Cityerror");
-            return true;
-        } else {
-            invalidElement("Cityerror");
-            return false;
-        }
-    }
+
     function surnameValid() {
 // condition de mini  3 lettre pour le nom
         const theSurname = formValues.surname;
@@ -130,23 +123,11 @@ const regexNameSurnameCity = (value) => {
             return false;
         }
     }
-    const regexCodePost = (value) => {
-        return  /^[0-9]{5}$/.test(value);
-    }
-    function PostCodeValid() {
-        const thePostCode = formValues.postcode;
 
-        if (regexCodePost(thePostCode)) {
-            validElement("Postcodeerror");
-            return true;
-    } else {
-            invalidElement("Postcodeerror");
-            return false;
-        }
-    }
     const regexEmail = (value) => {
-        return   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     }
+
     function EmailValid() {
         const TheEmail = formValues.email;
 
@@ -158,11 +139,13 @@ const regexNameSurnameCity = (value) => {
             return false;
         }
     }
+
     const regexAdress = (value) => {
         return /^[A-Za-z0-9\s]{5,25}$/.test(value);
     }
+
     function adressValid() {
-// condition de mini  3 lettre pour le nom
+// condition de mini  3 lettres pour le nom
         const theAdress = formValues.adress;
         if (regexAdress(theAdress)) {
             validElement("Adresserror");
@@ -173,14 +156,39 @@ const regexNameSurnameCity = (value) => {
         }
     }
 
+    const regexCodePost = (value) => {
+        return /^[0-9]{5}$/.test(value);
+    }
+
+    function PostCodeValid() {
+        const thePostCode = formValues.postcode;
+
+        if (regexCodePost(thePostCode)) {
+            validElement("Postcodeerror");
+            return true;
+        } else {
+            invalidElement("Postcodeerror");
+            return false;
+        }
+    }
+
+
+    function CityValid() {
+// condition de mini  3 lettre pour le nom
+        const theCity = formValues.city;
+        if (regexNameSurnameCity(theCity)) {
+            validElement("Cityerror");
+            return true;
+        } else {
+            invalidElement("Cityerror");
+            return false;
+        }
+    }
 
     // demande de validation avant d'envoyer les infos
     if (nameValid() && surnameValid() && PostCodeValid() && EmailValid() && adressValid() && CityValid()) {
         localStorage.setItem("formValues", JSON.stringify(formValues));
-    } else {
-        alert("formulaire incomplet");
     }
-
 
 
     //ajout des produits du panier + les données du form
@@ -188,38 +196,82 @@ const regexNameSurnameCity = (value) => {
         CameraLocalStorage,
         formValues
     }
-    
-    const sendbasket =   {
-        method: "POST",
-        body: JSON.stringify(SendProducts),
-        headers: {
-            'Content-Type': 'application/json',
 
-    }};
-    fetch(`http://localhost:3000/api/cameras/order`, sendbasket) .then((response) => response.json())
-        .then((json) => {
-            console.log(json)
-            localStorage.removeItem('camera'+ 'totalprice'+ 'formValues')
-            window.location.href = confirmation_commande.html;
-        })
-        .catch(() => {
-            alert(error)
-        })
+
+    function FormContact() {
+        firstName = document.getElementById("name").value;
+        lastName = document.getElementById("surname").value;
+        email = document.getElementById("email").value;
+        address = document.getElementById("adress").value;
+        zipcode = document.getElementById("postcode").value;
+        city = document.getElementById("city").value;
+
+
+
+        const order = {
+            contact: {
+                firstName: firstName,
+                lastName: lastName,
+                address: address + ' ' + zipcode,
+                city: city,
+                email: email,
+            },
+            products: products,
+        }
+        console.log(CameraLocalStorage);
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+        }
+
+        fetch(`http://localhost:3000/api/cameras/order`, requestOptions)
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json)
+                localStorage.removeItem('camera')
+                window.location.href = `confirmation_commande.html`
+            })
+            .catch(() => {
+                alert(error)
+            })
+    }
+
+})
+
+
+/*   const sendbasket =   {
+       method: "POST",
+       body: JSON.stringify(SendProducts),
+       headers: {
+           'Content-Type': 'application/json',
+
+   }};
+   fetch(`http://localhost:3000/api/cameras/order`, sendbasket) .then((response) => response.json())
+       .then((json) => {
+           console.log(json)
+           localStorage.removeItem('camera'+ 'totalprice'+ 'formValues')
+           window.location.href = confirmation_commande.html;
+       })
+       .catch(() => {
+           alert(error)
+       })
 }
 
-    // mettre dans requete post les infos recupérés
-   /* const order = {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(SendProducts),
+   // mettre dans requete post les infos recupérés
+  /* const order = {
+       method: "POST",
+       headers: {
+           'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(SendProducts),
 
-    }
-    fetch(`http://localhost:3000/api/cameras/order`, order)
-    console.log(order)
+   }
+   fetch(`http://localhost:3000/api/cameras/order`, order)
+   console.log(order)
 */
-)
+
 
 
 
