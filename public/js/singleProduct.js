@@ -7,12 +7,11 @@ let id = new URLSearchParams(queryString_url_id).get("name");
 console.log(id);// coupe l'id pour afficher que les chiffres sans le ?id=
 
 
-getData2 = async () => {
+getProduct = async () => {
     const response = await fetch(`http://localhost:3000/api/cameras/${id}`);
-    const data2 = await response.json();
-    let camera = new Camera(data2);
-
-
+    const product = await response.json();
+    let camera = new Camera(product);
 };
 
-getData2();
+getProduct();
+

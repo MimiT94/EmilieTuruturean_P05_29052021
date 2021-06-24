@@ -1,5 +1,5 @@
 let CameraLocalStorage = JSON.parse(localStorage.getItem("camera"));
-let totalprice = JSON.parse(localStorage.getItem("totalprice"))
+
 
 // affichage des produits du panier
 const basket = document.querySelector("#containerBasket")
@@ -26,7 +26,7 @@ if (CameraLocalStorage === null) {
 
         basketCam += `
             <tr id="articles">
-                <td>${CameraLocalStorage[j].nameProduct}</td>
+                <td></td>
                 <td>${CameraLocalStorage[j].quantity}
                    </td>
                 <td>${CameraLocalStorage[j].price / 100}€</td>
@@ -83,9 +83,6 @@ btnConfirm.addEventListener("click", (e) => {
 
     const formValues = new Form();
 
-    const textAlert = (value) => {
-        return ` ${value} : les chiffes ne sont pas autorises`;
-    }
     const regexNameSurnameCity = (value) => {
         return /^[A-Za-z]{3,15}$/.test(value);
     }
@@ -189,7 +186,9 @@ btnConfirm.addEventListener("click", (e) => {
     if (nameValid() && surnameValid() && PostCodeValid() && EmailValid() && adressValid() && CityValid()) {
         localStorage.setItem("formValues", JSON.stringify(formValues));
     }
-
+    else {
+        invalidElement();
+    }
 
     //ajout des produits du panier + les données du form
     const SendProducts = {
@@ -216,7 +215,7 @@ btnConfirm.addEventListener("click", (e) => {
                 city: city,
                 email: email,
             },
-            products: products,
+            products: camera._id,
         }
         console.log(CameraLocalStorage);
 
