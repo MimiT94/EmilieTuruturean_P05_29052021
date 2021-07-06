@@ -1,15 +1,119 @@
 let CameraLocalStorage = JSON.parse(localStorage.getItem("camera"));
+console.log(typeof CameraLocalStorage);
+console.log(CameraLocalStorage);
+let totalprice = 0;
+
+let arrayCamera = `
+    <h2>Récapitulatif de votre commande:</h2>
+    <table class="container">
+        <tr>
+        <th>Vos articles</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+        <th>Total</th>
+        </tr>
+                `;
+
+CameraLocalStorage.forEach((camera) => {
+    console.log(camera.idCam);
+    console.log(camera)
+    let id = camera.idCam;
 
 
+
+    fetch(`http://localhost:3000/api/cameras/${id}`)
+        .then( res => res.json())
+        .then( data =>
+           {
+            arrayCamera += `<tr id="articles">
+                <td>${data.name}</td>
+                <td>${camera.quantity}
+                   </td>
+                <td>${data.price / 100}€</td>
+                <td>${data.price / 100 * camera.quantity}€</td>
+            </tr>  
+                ` ;
+
+
+               const basket = document.querySelector("#containerBasket")
+               basket.innerHTML = arrayCamera + totalCamera ;
+               console.log(basket)  });
+
+
+});
+
+let totalCamera = `
+        <tr>
+                <td colspan="3" id="price-total">PRIX TOTAL</td>
+                <td>${totalprice} €</td>
+
+            </tr>
+        </table>
+       <button class="btn-panier empty" id="empty">Vider le panier</button>
+    `;
+
+
+const btnEmptyBasket = document.getElementById("empty");
+btnEmptyBasket.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem("camera");
+    alert("Votre panier est maintenant vide")
+    window.location.href = "panier.html";
+
+});
+
+
+
+/*
+    for (j = 0; j < CameraLocalStorage.length; j++){
+        arrayCamera += `<tr id="articles">
+                <td>${CameraLocalStorage[j].name}</td>
+                <td>${CameraLocalStorage[j].quantity}
+                   </td>
+                <td>${CameraLocalStorage[j].price / 100}€</td>
+                <td>${CameraLocalStorage[j].price / 100 * CameraLocalStorage[j].quantity}€</td>
+            </tr>   `
+    arrayCamera += `
+        <tr>
+                <td colspan="3" id="price-total">PRIX TOTAL</td>
+                <td>€</td>
+
+            </tr>
+        </table>
+       <button class="btn-panier empty" id="empty">Vider le panier</button>
+    `;}
+
+});
+
+
+
+ */
+/*
+
+Je récupère mon localstorage
+Je créé une boucle sur mon tableau
+Ici je suis dans la boucle et j'ai donc l'id présent dans chaque itération de ma boucle
+Je fais une requête fetch avec l'id pour récupérer les informations
+Je les ajoute à mon tableau
+J'inser mon tableau dans mon html
+
+*/
+
+
+/*
+
+let price = camera.price;
+
+
+console.log(CameraLocalStorage)
+console.log(CameraLocalStorage.quantity)*/
 // affichage des produits du panier
-const basket = document.querySelector("#containerBasket")
+//const basket = document.querySelector("#containerBasket")
 // si le panier est vide :
-if (CameraLocalStorage === null) {
-    const emptyBasket = `<h1>Votre panier  est vide</h1>`;
-    basket.innerHTML = emptyBasket;
-} else {
-
-
+//if (CameraLocalStorage === null) {
+  //  const emptyBasket = `<h1>Votre panier  est vide</h1>`;
+   // basket.innerHTML = emptyBasket;
+/* else {
     let basketCam = `
         <h2>Récapitulatif de votre commande:</h2>
         <table class="container">
@@ -20,24 +124,24 @@ if (CameraLocalStorage === null) {
                 <th>Total</th>
 
             </tr>
-    `;
+    `;*/
 
-    for (j = 0; j < CameraLocalStorage.length; j++) {
+   /* for (j = 0; j < CameraLocalStorage.length; j++) {
 
         basketCam += `
             <tr id="articles">
-                <td></td>
+                <td>${CameraLocalStorage[j].idCam}</td>
                 <td>${CameraLocalStorage[j].quantity}
                    </td>
-                <td>${CameraLocalStorage[j].price / 100}€</td>
+                <td>${CameraLocalStorage.price / 100}€</td>
                 <td>${CameraLocalStorage[j].price / 100 * CameraLocalStorage[j].quantity}€</td>
-            </tr>   
+            </tr>
         `;
     }
     basketCam += `
         <tr>
                 <td colspan="3" id="price-total">PRIX TOTAL</td>
-                <td>${totalprice / 100}€</td>
+                <td>€</td>
 
             </tr>
         </table>
@@ -48,13 +152,14 @@ if (CameraLocalStorage === null) {
     basket.innerHTML = basketCam;
 
 
-}
+}*/
 
 // vider le panier
 
 // selection du bouton pour supprimer
-const btnEmptyBasket = document.getElementById("empty");
+//const btnEmptyBasket = document.getElementById("empty");
 //vider le local storage
+/*
 btnEmptyBasket.addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem("camera");
@@ -64,7 +169,7 @@ btnEmptyBasket.addEventListener('click', (e) => {
 
 });
 
-
+*/
 //selection du bouton confirmation
 const btnConfirm = document.getElementById("btnConfirm");
 btnConfirm.addEventListener("click", (e) => {
@@ -185,8 +290,7 @@ btnConfirm.addEventListener("click", (e) => {
     // demande de validation avant d'envoyer les infos
     if (nameValid() && surnameValid() && PostCodeValid() && EmailValid() && adressValid() && CityValid()) {
         localStorage.setItem("formValues", JSON.stringify(formValues));
-    }
-    else {
+    } else {
         invalidElement();
     }
 
@@ -206,7 +310,6 @@ btnConfirm.addEventListener("click", (e) => {
         city = document.getElementById("city").value;
 
 
-
         const order = {
             contact: {
                 firstName: firstName,
@@ -215,7 +318,7 @@ btnConfirm.addEventListener("click", (e) => {
                 city: city,
                 email: email,
             },
-            products: camera._id,
+            products: CameraLocalStorage.idCam,
         }
         console.log(CameraLocalStorage);
 
