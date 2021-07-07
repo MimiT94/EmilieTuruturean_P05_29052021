@@ -55,7 +55,7 @@ figure figcaption h3 {
 }
 
 figure figcaption p {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: black;
 }
 
@@ -126,7 +126,9 @@ body, html {
     position: relative;
 
 }
-
+#containerBasket {
+    padding: 30px;
+}
 .header-text {
     text-align: center;
     color: white;
@@ -149,10 +151,10 @@ h2 {
     margin-bottom: 10px;
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 850px) {
     .product {
         display: flex;
-        height: 200px;
+        height: 350px;
         justify-content: center;
     }
 
@@ -222,7 +224,6 @@ form {
     text-align: center;
 }
 
-
 .empty {
     text-align: center;
     justify-content: center;
@@ -290,4 +291,7 @@ fieldset {
 
 #champs {
     margin: 20px 0;
+}
+form .champsIncorect{
+    color: red;
 }
