@@ -11,6 +11,7 @@ getProduct = async () => {
     const response = await fetch(`http://localhost:3000/api/cameras/${id}`);
     const product = await response.json();
     let camera = new Camera(product);
+    camera.showCamera();
 };
 
 getProduct();
