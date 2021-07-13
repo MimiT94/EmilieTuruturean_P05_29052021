@@ -73,159 +73,171 @@ if (CameraLocalStorage) {
 
 
 //selection du bouton confirmation
-if(CameraLocalStorage){
+if (CameraLocalStorage) {
 
 
-const btnConfirm = document.getElementById("btnConfirm");
-btnConfirm.addEventListener("click", (e) => {
-    e.preventDefault();
+    const btnConfirm = document.getElementById("btnConfirm");
+    btnConfirm.addEventListener("click", (e) => {
+        e.preventDefault();
+        /*
+        postOrder();
+        // appeler une fonction qui va être en charge de passer la commande postOrder
+    });
+/*
+    function postOrder() {
+        // création de l'objet Form
+        let form = new Form;
+        form.validForm();
+    }
 
-    class Form {
-        constructor() {
-            this.name = document.getElementById("name").value;
-            this.surname = document.getElementById("surname").value;
-            this.email = document.getElementById("email").value;
-            this.adress = document.getElementById("adress").value;
-            this.postcode = document.getElementById("postcode").value;
-            this.city = document.getElementById("city").value;
+ */
+    // a déplacer dans un fichier Form.js
+
+// function validForm
+    // validForm va créer un object Form de ta classe d'avant
+    // la classe dans le constructeur elle récupère les valeurs des input
+    // appeler une fonction de cette classe validForm qui va valider les input
+    // si les input sont valide alors on commande
+        const formValues = new Form();
+
+        const regexNameSurnameCity = (value) => {
+            return /^[A-Za-z]{3,15}$/.test(value);
         }
-    }
-
-    const formValues = new Form();
-
-    const regexNameSurnameCity = (value) => {
-        return /^[A-Za-z]{3,15}$/.test(value);
-    }
 
 //fonction pour l'input valide
-    function validElement(querySelectorId) {
-        document.querySelector(`#${querySelectorId}`).textContent = "";
-    }
+        function validElement(querySelectorId) {
+            document.querySelector(`#${querySelectorId}`).textContent = "";
+        }
 
-    //fonction pour l'input invalide
-    function invalidElement(querySelectorId) {
-        document.querySelector(`#${querySelectorId}`).textContent = "Veuillez bien compléter ce champs";
-    }
+        //fonction pour l'input invalide
+        function invalidElement(querySelectorId) {
+            document.querySelector(`#${querySelectorId}`).textContent = "Veuillez bien compléter ce champs";
+        }
 
-    function nameValid() {
+        function nameValid() {
 // condition de mini  3 lettre pour le nom
-        const theName = formValues.name;
-        if (regexNameSurnameCity(theName)) {
-            validElement("Nameerror");
-            return true;
-        } else {
-            invalidElement("Nameerror");
-            return false;
+            const theName = formValues.name;
+            if (regexNameSurnameCity(theName)) {
+                validElement("Nameerror");
+                return true;
+            } else {
+                invalidElement("Nameerror");
+                return false;
+            }
         }
-    }
 
-    function surnameValid() {
+        function surnameValid() {
 // condition de mini  3 lettre pour le nom
-        const theSurname = formValues.surname;
-        if (regexNameSurnameCity(theSurname)) {
-            validElement("Surnameerror");
-            return true;
-        } else {
-            invalidElement("Surnameerror");
-            return false;
+            const theSurname = formValues.surname;
+            if (regexNameSurnameCity(theSurname)) {
+                validElement("Surnameerror");
+                return true;
+            } else {
+                invalidElement("Surnameerror");
+                return false;
+            }
         }
-    }
 
-    const regexEmail = (value) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    }
-
-    function EmailValid() {
-        const TheEmail = formValues.email;
-
-        if (regexEmail(TheEmail)) {
-            validElement("Emailerror");
-            return true;
-        } else {
-            invalidElement("Emailerror");
-            return false;
+        const regexEmail = (value) => {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         }
-    }
 
-    const regexAdress = (value) => {
-        return /^[A-Za-z0-9\s]{5,25}$/.test(value);
-    }
+        function EmailValid() {
+            const TheEmail = formValues.email;
 
-    function adressValid() {
+            if (regexEmail(TheEmail)) {
+                validElement("Emailerror");
+                return true;
+            } else {
+                invalidElement("Emailerror");
+                return false;
+            }
+        }
+
+        const regexAdress = (value) => {
+            return /^[A-Za-z0-9\s]{5,25}$/.test(value);
+        }
+
+        function adressValid() {
 // condition de mini  3 lettres pour le nom
-        const theAdress = formValues.adress;
-        if (regexAdress(theAdress)) {
-            validElement("Adresserror");
-            return true;
-        } else {
-            invalidElement("Adresserror");
-            return false;
+            const theAdress = formValues.adress;
+            if (regexAdress(theAdress)) {
+                validElement("Adresserror");
+                return true;
+            } else {
+                invalidElement("Adresserror");
+                return false;
+            }
         }
-    }
 
-    const regexCodePost = (value) => {
-        return /^[0-9]{5}$/.test(value);
-    }
-
-    function PostCodeValid() {
-        const thePostCode = formValues.postcode;
-
-        if (regexCodePost(thePostCode)) {
-            validElement("Postcodeerror");
-            return true;
-        } else {
-            invalidElement("Postcodeerror");
-            return false;
+        const regexCodePost = (value) => {
+            return /^[0-9]{5}$/.test(value);
         }
-    }
+
+        function PostCodeValid() {
+            const thePostCode = formValues.postcode;
+
+            if (regexCodePost(thePostCode)) {
+                validElement("Postcodeerror");
+                return true;
+            } else {
+                invalidElement("Postcodeerror");
+                return false;
+            }
+        }
 
 
-    function CityValid() {
+        function CityValid() {
 // condition de mini  3 lettre pour le nom
-        const theCity = formValues.city;
-        if (regexNameSurnameCity(theCity)) {
-            validElement("Cityerror");
-            return true;
-        } else {
-            invalidElement("Cityerror");
-            return false;
+            const theCity = formValues.city;
+            if (regexNameSurnameCity(theCity)) {
+                validElement("Cityerror");
+                return true;
+            } else {
+                invalidElement("Cityerror");
+                return false;
+            }
         }
-    }
 
-    // demande de validation avant d'envoyer les infos
-    if (nameValid() && surnameValid() && PostCodeValid() && EmailValid() && adressValid() && CityValid()) {
-        localStorage.setItem("formValues", JSON.stringify(formValues));
-    } else {
-        invalidElement(CityValid(), surnameValid(), nameValid(), PostCodeValid(), EmailValid(), adressValid());
-    }
+        // demande de validation avant d'envoyer les infos
+        if (nameValid() && surnameValid() && PostCodeValid() && EmailValid() && adressValid() && CityValid()) {
+            localStorage.setItem("formValues", JSON.stringify(formValues));
+        } else {
+            invalidElement(CityValid(), surnameValid(), nameValid(), PostCodeValid(), EmailValid(), adressValid());
+        }
 
-    //ajout des produits du panier + les données du form
-    const SendProducts = {
-        CameraLocalStorage,
-        formValues
-    }
+        //ajout des produits du panier + les données du form
+        const SendProducts = {
+            CameraLocalStorage,
+            formValues
+        }
 
 
-    function FormContact() {
         firstName = document.getElementById("name").value;
         lastName = document.getElementById("surname").value;
         email = document.getElementById("email").value;
         address = document.getElementById("adress").value;
         zipcode = document.getElementById("postcode").value;
         city = document.getElementById("city").value;
-    }
+
+
+        let productsBought = [];
+
+        CameraLocalStorage.forEach(article => productsBought.push(article.idCam));
 
         const order = {
             contact: {
-                firstName: nameValid,
-                lastName: surnameValid,
-                address: adressValid + ' ' + PostCodeValid,
-                city: CityValid,
-                email: EmailValid,
+                firstName: firstName,
+                lastName: lastName,
+                address: address + ' ' + zipcode,
+                city: city,
+                email: email,
             },
-            products: CameraLocalStorage.id,
-        }
-        console.log(CameraLocalStorage);
+            products: productsBought,
+        };
+        console.log(order);
+
+        console.log(productsBought);
 
         const requestOptions = {
             method: 'POST',
@@ -237,16 +249,19 @@ btnConfirm.addEventListener("click", (e) => {
             .then((response) => response.json())
             .then((json) => {
                 console.log(json)
-                localStorage.removeItem('camera')
+                //localStorage.removeItem('camera')
+                localStorage.setItem("orderId", CameraLocalStorage.idCam);
+                localStorage.setItem("total", totalprice);
+
                 window.location.href = `confirmation_commande.html`
             })
             .catch(() => {
-                alert(error)
+                alert("error")
             })
 
 
-})}
-else {
+    })
+} else {
     const form = document.querySelector("#containerForm")
     form.innerHTML = "<p id='emptyMessage'>Revenez quand vous aurez fait votre choix</p>";
 }
