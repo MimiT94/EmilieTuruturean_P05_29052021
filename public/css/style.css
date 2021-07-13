@@ -295,3 +295,7 @@ fieldset {
 form .champsIncorect{
     color: red;
 }
+#emptyMessage {
+    text-align: center;
+    text-transform: uppercase;
+}

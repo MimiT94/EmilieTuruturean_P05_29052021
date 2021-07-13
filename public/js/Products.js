@@ -14,7 +14,7 @@ class Products {
                         <figure>
                             <img class ="product_picture" src='${product.imageUrl}' />
                             <figcaption>
-                                <h2 class="product_name">'${product.name}'</h2>
+                                <h2 class="product_name">${product.name}</h2>
                                 <button class="btn-panier">plus de détails</button>
                             </figcaption>
                         </figure>
