@@ -1,22 +1,13 @@
-
-
-let orderId = JSON.parse(localStorage.getItem("orderId"));
-let totalConfirmation = JSON.parse(localStorage.getItem("total"));
-
-    const totalConfirmation = document.querySelector("euros");
-    const orderId = document.querySelector("commandeNumber");
-
-    totalConfirmation.innerHTML = ` <p>Total de votre commande: <span id="euros">${total}€</span></p>`
-    orderId.innerHTML = localStorage.getItem("orderId");
-
-    // On vide le localStorage pour recommencer plus tard le processus d'achat
-
-
+let orderId = localStorage.getItem("orderId");
+let totalConfirmation = localStorage.getItem("total");
 
 
 let ConfirmText = `
-    <h3 id="commande"> Votre commande a bien été enregistrée ! Merci d'avoir choisis Orinoco</h3>
-    <p>Total de votre commande: <span id="euros">${totalprice}€</span></p>
+    <h3 id="commande"> Votre commande a bien été enregistrée ! </h3>
+    <p>Total de votre commande: <span id="euros">${totalConfirmation}€</span></p>
     <p>Votre numéro de commande est le suivant: <span id="commandeNumber">${orderId}</span></p>
+    <p>Vous allez recevoir un mail de confirmation d'ici peu de temps.</p>
+    <h3>Merci d'avoir choisis Orinoco et à bientôt</h3>
                 `;
-    //localStorage.clear();
+document.getElementById('commande-confirmation').innerHTML = ConfirmText;
+localStorage.clear();
