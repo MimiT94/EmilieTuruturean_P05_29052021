@@ -26,8 +26,8 @@ let totalCamera = `
 
 if (CameraLocalStorage) {
     CameraLocalStorage.forEach((camera) => {
-        console.log(camera.idCam);
-        console.log(camera)
+       // console.log(camera.idCam);
+        //console.log(camera)
         let id = camera.idCam;
 
 
@@ -111,9 +111,7 @@ if (CameraLocalStorage) {
                 },
                 products: productsBought,
             };
-            console.log(order);
 
-            console.log(productsBought);
 
             const requestOptions = {
                 method: 'POST',
@@ -151,39 +149,6 @@ if (CameraLocalStorage) {
     form.innerHTML = "<p id='emptyMessage'>Revenez quand vous aurez fait votre choix</p>";
 }
 
-
-/*   const sendbasket =   {
-       method: "POST",
-       body: JSON.stringify(SendProducts),
-       headers: {
-           'Content-Type': 'application/json',
-
-   }};
-   fetch(`http://localhost:3000/api/cameras/order`, sendbasket) .then((response) => response.json())
-       .then((json) => {
-           console.log(json)
-           localStorage.removeItem('camera'+ 'totalprice'+ 'formValues')
-           window.location.href = confirmation_commande.html;
-       })
-       .catch(() => {
-           alert(error)
-       })
-}
-
-   // mettre dans requete post les infos recupérés
-  /* const order = {
-       method: "POST",
-       headers: {
-           'Content-Type': 'application/json',
-       },
-       body: JSON.stringify(SendProducts),
-
-   }
-   fetch(`http://localhost:3000/api/cameras/order`, order)
-   console.log(order)
-    let order = new Order;
-        order.postOrder();
- */
 
 
 

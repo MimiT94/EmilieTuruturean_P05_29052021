@@ -6,12 +6,7 @@ class Camera {
         this.price = data.price;
         this.description = data.description;
         this.name = data.name;
-
-
-
-
     }
-
     showCamera() {
         let camera = this.camera;
         let body = document.getElementById("body");
@@ -93,47 +88,6 @@ class Camera {
                 CameraLocalStorage.push(productOptions)
             }
             localStorage.setItem("camera", JSON.stringify(CameraLocalStorage));
-            console.log(CameraLocalStorage);
-
-// calcul du prix total
-            /*
-            let totalPrice = localStorage.getItem('totalprice');
-            if (totalPrice != null) {
-                totalPrice = parseInt(totalPrice);
-                localStorage.setItem('totalprice', totalPrice + camera.price);
-            } else {
-                localStorage.setItem("totalprice", camera.price)
-            }
-
-             */
-            //local storage
-            //let CameraLocalStorage = JSON.parse(localStorage.getItem("camera")) || [];
-            // if id dans le panier alors quantity ++
-
-            console.log(CameraLocalStorage);
-//pour la quantité du produit
-//let product = CameraLocalStorage.find( product => camera._id == idCam)
-            //          if(productOptions){
-            //           camera.quantity ++
-            //}
-            //      CameraLocalStorage.push(productOptions);
-            // fonction pour ajouter le produit selectionné au local storage
-            /*const addCamerainLocalStorage = () => {
-
-                localStorage.setItem("camera", JSON.stringify(CameraLocalStorage));
-            }*/
-
-/*
-            if (CameraLocalStorage) {
-                addCamerainLocalStorage();
-                productOptions.quantity++;
-
-            } else {
-                CameraLocalStorage = [];
-                addCamerainLocalStorage();
-            }
-*/
-
         })
     }
 
