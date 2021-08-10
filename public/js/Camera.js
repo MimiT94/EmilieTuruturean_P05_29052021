@@ -31,20 +31,16 @@ class Camera {
                         </figcaption>
                 </figure>
             </article>
-
-       `
-        ;
+       `;
         let lensesOptions = ``;
-
 //selection de l'option
         for (let i = 0; i < camera.lenses.length; i++) {
             lensesOptions += `<option value="" >${camera.lenses[i]}</option>;
-                               `
+                         `
         }
         // ajout du choix des lenses avec id de select
         document.getElementById("lenses").innerHTML =
             `<option value="" >--Choisissez une option--</option>` + lensesOptions;
-
 //choix de quantité
         const quantityValue =
             `<option value="1" >1</option>
@@ -52,19 +48,15 @@ class Camera {
         <option value="3" >3</option>`;
         const addQuantity = document.getElementById("quantity")
         addQuantity.innerHTML = quantityValue;
-        //
         //ecouter le click
         document.getElementById("btn").addEventListener("click", (e) => {
             e.preventDefault();
 //alert("camera prise en compte")
             document.getElementById("productok").innerHTML = `<h2>Votre article est bien enregistré</h2>`;
-
             let selectedCamera = camera;
             selectedCamera.camera = document.querySelector("select").value;
 // ajout du choix de la quantité
             const quantityChoice = parseInt(addQuantity.value);
-
-
 //recuperation des données de la page
             let productOptions = {
                 //nameProduct: camera.name,
@@ -73,7 +65,6 @@ class Camera {
                 //price: camera.price
             }
             let CameraLocalStorage = JSON.parse(localStorage.getItem("camera")) || [];
-
             console.log(CameraLocalStorage);
             if (CameraLocalStorage.some(cameraBasket => cameraBasket.idCam === camera._id)) {
                 console.log('existant dans le panier');
@@ -90,5 +81,4 @@ class Camera {
             localStorage.setItem("camera", JSON.stringify(CameraLocalStorage));
         })
     }
-
 }

@@ -1,11 +1,8 @@
 class Products {
     constructor() {
-
     }
-
     showProducts() {
         let home = document.getElementById("home");
-
         home.innerHTML = `<h2>Nos appareils photos</h2>`;
         this.products.forEach(product => {
             home.innerHTML += `
@@ -25,5 +22,3 @@ class Products {
 
     }
 }
-
-
